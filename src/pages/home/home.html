@@ -1,17 +1,31 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>ghgj</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+    <h1>Juego de Adivinanzas</h1>
+    <h3> Numero de intentos: {{intentos}} </h3>
+    <ion-input type="number" min="1" max="100" [(ngModel)]="num" placeholder="Introduce un número del 1 al 100" aria-required></ion-input>
+    <p>El número secreto es {{ mayorMenor }} que {{num}}</p>
+    <ion-card *ngIf="mayorMenor=='Igual'">
+        <ion-card-header>
+            ¡¡Felicitaciones!!
+        </ion-card-header>
+        <ion-card-content>
+            Felicitaciones, haz acerdado el número, el número secreto es el {{numSecret}}
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="intentos==0">
+        <ion-card-header>
+            ¡¡Lo siento!!
+        </ion-card-header>
+        <ion-card-content>
+            Tus vidas se han acabado
+        </ion-card-content>
+    </ion-card>
+    <button *ngIf="intentos>0 && mayorMenor!='Igual' " ion-button block (click)="compruebaNumero()"> Adivina </button>
+    <button *ngIf="mayorMenor=='Igual' || intentos==0" ion-button block (click)="reinicia()"> Volver a Jugar </button>
 </ion-content>
